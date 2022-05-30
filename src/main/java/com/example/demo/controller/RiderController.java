@@ -24,7 +24,7 @@ public class RiderController {
   @Autowired
   TourTeamRepository tourTeamRepository;
 
-  //GET
+  //READ
   //FIND ALL
   @GetMapping("/riders")
   public List<Rider> getAllRiders() {
