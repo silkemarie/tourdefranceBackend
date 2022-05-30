@@ -8,94 +8,97 @@ import javax.persistence.*;
 public class Rider {
 
   @Id
-  @Column(name = "rider_id")
-  private String riderId;
-  private String riderName;
-  private int sprintPoints;
-  private int mountainPoints;
-  private int totalPoints;
-  private String time;
-  private int age;
+  //@Column(name="riderId")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="riderId")
+  private String rider_id;
+  private String rider_name;
+  private int sprint_points;
+  private int mountain_points;
+  private int total_points;
+  private String rider_time;
+  private int rider_age;
 
   @ManyToOne
-  @JoinColumn(name = "team_id")
+  @JoinColumn(name="fk_team_id")
   @JsonBackReference
-  private TourTeam tourTeam;
+  private Team team;
 
-  public String getRiderId() {
-    return riderId;
+  public Rider(String rider_id, String rider_name, int sprint_points, int mountain_points, int total_points, String rider_time, int rider_age, Team team) {
+    this.rider_id = rider_id;
+    this.rider_name = rider_name;
+    this.sprint_points = sprint_points;
+    this.mountain_points = mountain_points;
+    this.total_points = total_points;
+    this.rider_time = rider_time;
+    this.rider_age = rider_age;
+    this.team = team;
   }
 
-  public void setRiderId(String riderId) {
-    this.riderId = riderId;
+  public Rider() {
   }
 
-  public String getRiderName() {
-    return riderName;
+  public String getRider_id() {
+    return rider_id;
   }
 
-  public void setRiderName(String riderName) {
-    this.riderName = riderName;
+  public void setRider_id(String rider_id) {
+    this.rider_id = rider_id;
   }
 
-  public int getSprintPoints() {
-    return sprintPoints;
+  public String getRider_name() {
+    return rider_name;
   }
 
-  public void setSprintPoints(int sprintPoints) {
-    this.sprintPoints = sprintPoints;
+  public void setRider_name(String rider_name) {
+    this.rider_name = rider_name;
   }
 
-  public int getMountainPoints() {
-    return mountainPoints;
+  public int getSprint_points() {
+    return sprint_points;
   }
 
-  public void setMountainPoints(int mountainPoints) {
-    this.mountainPoints = mountainPoints;
+  public void setSprint_points(int sprint_points) {
+    this.sprint_points = sprint_points;
   }
 
-  public int getTotalPoints() {
-    return totalPoints;
+  public int getMountain_points() {
+    return mountain_points;
   }
 
-  public void setTotalPoints(int totalPoints) {
-    this.totalPoints = totalPoints;
+  public void setMountain_points(int mountain_points) {
+    this.mountain_points = mountain_points;
   }
 
-  public TourTeam getTourTeam() {
-    return tourTeam;
+  public int getTotal_points() {
+    return total_points;
   }
 
-  public void setTourTeam(TourTeam tourTeam) {
-    this.tourTeam = tourTeam;
+  public void setTotal_points(int total_points) {
+    this.total_points = total_points;
   }
 
-  public String getTime() {
-    return time;
+  public String getRider_time() {
+    return rider_time;
   }
 
-  public void setTime(String time) {
-    this.time = time;
+  public void setRider_time(String rider_time) {
+    this.rider_time = rider_time;
   }
 
-  public int getAge() {
-    return age;
+  public int getRider_age() {
+    return rider_age;
   }
 
-  public void setAge(int age) {
-    this.age = age;
+  public void setRider_age(int rider_age) {
+    this.rider_age = rider_age;
   }
 
-  @Override
-  public String toString() {
-    return "Rider{" +
-        "riderId=" + riderId +
-        ", riderName='" + riderName + '\'' +
-        ", sprintPoints=" + sprintPoints +
-        ", mountainPoints=" + mountainPoints +
-        ", totalPoints=" + totalPoints +
-        ", tourTeam=" + tourTeam +
-        '}';
+  public Team getTeam() {
+    return team;
   }
 
+  public void setTeam(Team team) {
+    this.team = team;
+  }
 }
