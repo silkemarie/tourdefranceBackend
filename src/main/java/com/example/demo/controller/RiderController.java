@@ -6,11 +6,11 @@ import com.example.demo.entity.TourTeam;
 import com.example.demo.repository.RiderRepository;
 import com.example.demo.repository.TourTeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +24,7 @@ public class RiderController {
   @Autowired
   TourTeamRepository tourTeamRepository;
 
+  //GET
   //FIND ALL
   @GetMapping("/riders")
   public List<Rider> getAllRiders() {
@@ -71,4 +72,35 @@ public class RiderController {
     return null;
   }
 
+  //CREATE
+  @PostMapping("/rider")
+  @ResponseStatus(HttpStatus.CREATED)
+  public Rider createRider(@RequestBody Rider rider) {
+    return riderRepository.save(rider);
+  }
+
+  //UPDATE
+  @PutMapping("/rider/{riderId}")
+  public ResponseEntity<Rider> updateRider(@PathVariable String riderId, @RequestBody Rider rider) {
+    Optional<Rider> optionalRider = riderRepository.findRiderById(riderId);
+    if (optionalRider.isPresent()) {
+      riderRepository.save(rider);
+      return new ResponseEntity<Rider>(rider, HttpStatus.OK);
+    } else {
+      Rider notfoundRider = new Rider();
+      notfoundRider.setRiderId("Rider with the id " + riderId + " could not be found.");
+      return new ResponseEntity<Rider>(notfoundRider, HttpStatus.NOT_FOUND);
+    }
+  }
+
+  //DELETE
+  @DeleteMapping("/rider/{riderId}")
+  public ResponseEntity<String> deleteRider(@PathVariable String riderId) {
+    try {
+      riderRepository.deleteById(riderId);
+      return new ResponseEntity<>("Deleted rider with id " + riderId, HttpStatus.OK);
+    } catch (Exception err) {
+      return new ResponseEntity<>("Could not delete rider with id " + riderId, HttpStatus.NOT_FOUND);
+    }
+  }
 }
