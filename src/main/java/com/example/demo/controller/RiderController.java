@@ -65,10 +65,8 @@ public class RiderController {
       riderRepository.save(rider);
       return new ResponseEntity<>(rider, HttpStatus.OK);
     } else {
-      /*Rider notfoundRider = new Rider();
+      Rider notfoundRider = new Rider();
       notfoundRider.setRider_id("Rider with the id " + id + " could not be found.");
-
-       */
       return new ResponseEntity<>(rider, HttpStatus.NOT_FOUND);
     }
   }

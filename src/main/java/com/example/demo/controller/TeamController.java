@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.entity.Team;
 import com.example.demo.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +36,6 @@ public class TeamController {
     return notfoundTeam;
   }
 
-  /*
-
-  //FIND BY NAME
-  @GetMapping("/team/{name}")
-  public Team findTeamByName(@PathVariable String name) {
-    Optional<Team> obj = teamRepository.findByTeamName(name);
-    if (obj.isPresent()) {
-      return obj.get();
-    }
-    Team notfoundTeam = new Team();
-    notfoundTeam.setTeam_id("Team with name " + name + " could not be found.");
-    return notfoundTeam;
-  }
-
   //CREATE
   @PostMapping("/team")
   @ResponseStatus(HttpStatus.CREATED)
@@ -82,7 +67,5 @@ public class TeamController {
       return new ResponseEntity<>("Could not delete team with id " + id, HttpStatus.NOT_FOUND);
     }
   }
-
-   */
 
 }
