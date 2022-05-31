@@ -52,6 +52,8 @@ public class RiderController {
   @PostMapping("/rider")
   @ResponseStatus(HttpStatus.CREATED)
   public Rider createRider(@RequestBody Rider rider) {
+    Team team = new Team();
+    team.addRiders(rider);
     return riderRepository.save(rider);
   }
 

@@ -17,6 +17,10 @@ public class Team {
   @JoinColumn(name="fk_team_id")
   private List<Rider> riders;
 
+  public void addRiders(Rider rider) {
+    this.riders.add(rider);
+  }
+
   public String getTeam_id() {
     return team_id;
   }
